@@ -1,20 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 
-let prisma: PrismaClient;
-
 declare global {
+  // Declare global variable to hold the Prisma client instance in development
   var prisma: PrismaClient | undefined;
 }
 
-// In production, create a new instance of Prisma Client for each request
-if (process.env.NODE_ENV === "production") {
-  prisma = new PrismaClient();
-} else {
-  // In development, use a singleton pattern to reuse the Prisma Client
-  if (!global.prisma) {
-    global.prisma = new PrismaClient();
-  }
-  prisma = global.prisma;
+// Use singleton pattern to ensure only one Prisma client instance in development
+const prisma = global.prisma || new PrismaClient({ log: ["info"] });
+
+// Only assign global prisma client in development
+if (process.env.NODE_ENV !== "production") {
+  global.prisma = prisma;
 }
 
 export default prisma;
