@@ -6,7 +6,7 @@ export default async function calculateAndUpdateBalances(
   type: string,
   days: number
 ): Promise<void> {
-  const balance = await prisma.balances.findFirst({
+  const balance = await prisma?.balances.findFirst({
     where: {
       email,
       year,
@@ -77,8 +77,8 @@ export default async function calculateAndUpdateBalances(
       throw new Error(`Unsupported leave type: ${type}`);
   }
 
-  await prisma.balances.update({
+  await prisma?.balances.update({
     where: { id: balance.id },
-    data: balanceUpdate,
+    data: balance,
   });
 }

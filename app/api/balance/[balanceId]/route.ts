@@ -20,10 +20,11 @@ export async function PATCH(req: Request) {
 
     const { id, ...data } = body;
 
-    await prisma.balances.update({
+    await prisma?.balances.update({
       where: { id },
       data,
     });
+    
     return NextResponse.json({ message: "Success" }, { status: 200 });
   } catch (error) {
     console.error(error);
