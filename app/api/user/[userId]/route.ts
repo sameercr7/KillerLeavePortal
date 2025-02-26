@@ -21,7 +21,7 @@ export async function PATCH(req: Request) {
 
     const { phone, department, id, role, title } = body;
 
-    await prisma.user.update({
+    await prisma?.user.update({
       where: { id },
       data: { phone, department, role, title },
     });
