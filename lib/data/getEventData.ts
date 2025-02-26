@@ -7,7 +7,7 @@ export async function getEventsData() {
     return [];
   }
   try {
-    const eventsData = await prisma.events.findMany({});
+    const eventsData = await prisma?.events.findMany({});
 
     return [...eventsData];
   } catch (error) {

@@ -12,7 +12,7 @@ export async function getAllUsers() {
       return [];
     }
     try {
-      const usersData = await prisma.user.findMany({
+      const usersData = await prisma?.user.findMany({
         orderBy: [{ name: "desc" }],
       });
   

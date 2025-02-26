@@ -38,7 +38,7 @@ try {
       name,
     } = body;
 
-    const existingCredits = await prisma.balances.findFirst({
+    const existingCredits = await prisma?.balances.findFirst({
       where: {
         year,
         email,
@@ -52,7 +52,7 @@ try {
       );
     }
 
-    await prisma.balances.create({
+    await prisma?.balances.create({
       data: {
         name,
         email,

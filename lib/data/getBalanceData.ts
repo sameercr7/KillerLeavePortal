@@ -10,7 +10,7 @@ export async function getUserBalances() {
     const email = loggedInUser.email as string;
     const year = new Date().getFullYear().toString();
 
-    const balances = await prisma.balances.findFirst({
+    const balances = await prisma?.balances.findFirst({
       where: {
         email,
         year,
@@ -35,7 +35,7 @@ export async function getAllBalances() {
     return [];
   }
   try {
-    const balances = await prisma.balances.findMany({
+    const balances = await prisma?.balances.findMany({
       orderBy: [{ year: "desc" }],
     });
 

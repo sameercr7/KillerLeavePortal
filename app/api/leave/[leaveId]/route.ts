@@ -33,7 +33,7 @@ export async function PATCH(req: Request) {
       await calculateAndUpdateBalances(email, year, type, days);
       const title = `${user} on Leave`
       const description = `For ${days} days`
-      await prisma.events.create({
+      await prisma?.events.create({
         data: {
           startDate,
           title,
@@ -41,7 +41,7 @@ export async function PATCH(req: Request) {
         },
       });
     }
-    await prisma.leave.update({
+    await prisma?.leave.update({
       where: { id },
       data: { moderatorNote: notes, status, updatedAt, moderator },
     });

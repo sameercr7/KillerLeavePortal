@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     const endDateObj = parseISO(endDate)
     const calcDays = differenceInDays(endDateObj, startDateObj) + 1;
 
-    const existingLeave = await prisma.leave.findFirst({
+    const existingLeave = await prisma?.leave.findFirst({
       where: {
         startDate,
         endDate,
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       );
     }
     const year = new Date().getFullYear().toString();
-    await prisma.leave.create({
+    await prisma?.leave.create({
       data: {
         startDate,
         endDate,
