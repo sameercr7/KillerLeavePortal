@@ -1,16 +1,16 @@
-// https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices
-
 import { PrismaClient } from "@prisma/client";
 
 let prisma: PrismaClient;
 
 declare global {
-  var prisma: PrismaClient;
+  var prisma: PrismaClient | undefined;
 }
 
+// In production, create a new instance of Prisma Client for each request
 if (process.env.NODE_ENV === "production") {
   prisma = new PrismaClient();
 } else {
+  // In development, use a singleton pattern to reuse the Prisma Client
   if (!global.prisma) {
     global.prisma = new PrismaClient();
   }
