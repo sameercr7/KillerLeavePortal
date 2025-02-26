@@ -1,16 +1,20 @@
+// https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices
+
 import { PrismaClient } from "@prisma/client";
 
+let prisma: PrismaClient;
+
 declare global {
-  // Declare global variable to hold the Prisma client instance in development
-  var prisma: PrismaClient | undefined;
+  var prisma: PrismaClient;
 }
 
-// Use singleton pattern to ensure only one Prisma client instance in development
-const prisma = global.prisma || new PrismaClient({ log: ["info"] });
-
-// Only assign global prisma client in development
-if (process.env.NODE_ENV !== "production") {
-  global.prisma = prisma;
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
+  }
+  prisma = global.prisma;
 }
 
 export default prisma;
